@@ -681,6 +681,11 @@ func (d Decimal) StringFixedCash(interval uint8) string {
 	return rounded.string(false)
 }
 
+// StringRaw returns a string without trimming trailing zeros
+func (d Decimal) StringRaw() string {
+	return d.string(false)
+}
+
 // Round rounds the decimal to places decimal places.
 // If places < 0, it will round the integer part to the nearest 10^(-places).
 //
