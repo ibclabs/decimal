@@ -79,6 +79,27 @@ func TestNullDecimalMarshal(t *testing.T) {
 	}
 }
 
+func TestNullDecimalUnmarshalNil(t *testing.T) {
+	dec := NullDecimal{Decimal: New(5, 0), Valid: true}
+	err := dec.Unmarshal(nil)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if dec.Valid != false {
+		t.Error("valid is not FALSE", dec.Valid)
+		return
+	}
+	if dec.Decimal.value != nil {
+		t.Error("decimal.value is not NIL", dec.Decimal.value)
+		return
+	}
+	if dec.Decimal.exp != 0 {
+		t.Error("decimal.ex[ is not ZERO", dec.Decimal.exp)
+		return
+	}
+}
+
 func testInternalNullDecimalMarshal(t *testing.T, dec1 NullDecimal) {
 	// check marshalling
 	data1, err := dec1.Marshal()

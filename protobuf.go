@@ -86,18 +86,22 @@ func (d *NullDecimal) Size() int {
 	return len(b)
 }
 
+func (d NullDecimal) Equal(d2 NullDecimal) bool {
+	return d.Compare(d2) == 0
+}
+
 func (d NullDecimal) Compare(d2 NullDecimal) int {
 	var result int
 	switch {
-	case d.Valid == false && d2.Valid == false:
+	case !d.Valid && !d2.Valid:
 		{
 			result = 0
 		}
-	case d.Valid == true && d2.Valid == false:
+	case d.Valid && !d2.Valid:
 		{
 			result = 1
 		}
-	case d.Valid == false && d2.Valid == true:
+	case !d.Valid && d2.Valid:
 		{
 			result = -1
 		}
