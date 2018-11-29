@@ -57,7 +57,9 @@ func (d NullDecimal) MarshalTo(data []byte) (n int, err error) {
 
 func (d *NullDecimal) Unmarshal(data []byte) error {
 	if len(data) < 1 {
-		return errors.New("too short data")
+		d.Valid = false
+		d.Decimal = Decimal{}
+		return nil
 	}
 	switch data[0] {
 	case 0:
