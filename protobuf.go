@@ -86,10 +86,6 @@ func (d *NullDecimal) Size() int {
 	return len(b)
 }
 
-func (d NullDecimal) Equal(d2 NullDecimal) bool {
-	return d.Compare(d2) == 0
-}
-
 func (d NullDecimal) Compare(d2 NullDecimal) int {
 	var result int
 	switch {
